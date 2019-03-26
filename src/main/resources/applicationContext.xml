@@ -78,7 +78,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			<value>jdbc:mysql://39.96.211.124:3306/sms</value>
+			<value>jdbc:mysql://39.96.211.124:3306/sms?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</value>
 		</property>
 		<property name="username">
 			<value>root</value>
