@@ -1,0 +1,31 @@
+<script type="text/javascript">
+	var basePath = "<%=basePath%>";
+	
+	var logonUrl = basePath + "Logon";
+	var logoutUrl = basePath + "Logout";
+	
+	var schoolsUrl = basePath + "Schools";
+	var schoolUrl = basePath + "School";
+	
+	var branchSchoolsUrl = basePath + "BranchSchools";
+	var branchSchoolUrl = basePath + "BranchSchool";
+	
+	var groupsUrl = basePath + "Groups";
+	var groupUrl = basePath + "Group";
+	
+	var usersUrl = basePath + "Users";
+	var userUrl = basePath + "User";
+	
+	var presidentsUrl = basePath + "Presidents";
+	var presidentUrl = basePath + "President";
+	
+	var directorsUrl = basePath + "Directors";
+	var directorUrl = basePath + "Director";
+	
+	var groupLeadersUrl = basePath + "GroupLeaders";
+	var groupLeaderUrl = basePath + "GroupLeader";
+	
+	var monitorsUrl = basePath + "Monitors";
+	var monitorUrl = basePath + "Monitor";
+	var monitorPhotoUrl = basePath + "MonitorPhoto";
+</script>

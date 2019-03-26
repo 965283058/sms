@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "D:\wesley\sms\src\main\resources\mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+    
+    <mappers>
+    	<mapper resource="com/sms/mapper/FeeTypeMapper.xml"/>
+		<mapper resource="com/sms/mapper/FeeMapper.xml"/>
+    	<mapper resource="com/sms/mapper/UserMapper.xml"/>
+    	<mapper resource="com/sms/mapper/SchoolMapper.xml"/>
+    	<mapper resource="com/sms/mapper/BranchSchoolMapper.xml"/>
+    	<mapper resource="com/sms/mapper/UserRoleAssociationMapper.xml"/>
+    	<mapper resource="com/sms/mapper/GroupMapper.xml"/>
+    	<mapper resource="com/sms/mapper/MonitorMapper.xml"/>
+    	<mapper resource="com/sms/mapper/SchoolInformationMapper.xml"/>
+    	<mapper resource="com/sms/mapper/MemberMapper.xml"/>
+	</mappers>
+</configuration>
