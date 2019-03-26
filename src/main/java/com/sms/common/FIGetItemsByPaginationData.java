@@ -1,6 +1,5 @@
 package com.sms.common;
 
-import com.sms.common.DataQueryResult;
 import com.sms.common.pagination.PaginationData;
 
 import net.sf.json.JSONObject;

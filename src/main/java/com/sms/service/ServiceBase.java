@@ -35,4 +35,7 @@ public abstract class ServiceBase {
 
 	@Autowired
 	protected MonitorMapper monitorMapper;
+
+	@Autowired
+	protected InformationMapper informationMapper;
 }

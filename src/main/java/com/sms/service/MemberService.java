@@ -1,11 +1,14 @@
 package com.sms.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.sms.common.CommandCode;
 import com.sms.common.CommandCodeDictionary;
 import com.sms.common.CommandResult;
 import com.sms.common.helper.BranchSchoolDataHelper;
+import com.sms.common.helper.SHAHelper;
 import com.sms.common.helper.SchoolDataHelper;
 import com.sms.model.*;
 import com.sms.vo.BranchSchoolVO;
@@ -109,6 +112,17 @@ public class MemberService extends ServiceBase implements IMemberService {
 
 //		// Create new member in database by using mapper
 		member = MemberDataHelper.convertMemberVOToMember(memberVO);
+
+		// Hash the password
+		String hashedPassword;
+		try {
+			hashedPassword = SHAHelper.generateHashedString(memberVO.getLogPassword());
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new CommandResult(CommandCode.PASSWORD_HASHING_FAILED.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.PASSWORD_HASHING_FAILED));
+		}
+		member.setLogPassword(hashedPassword);
+
 		memberMapper.insert(member);
 		return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
 	}
