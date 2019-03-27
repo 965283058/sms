@@ -63,6 +63,9 @@ public enum CommandCode
     //Fee type
     FEE_TYPE_NOT_EXIST(8102),
 
+    //Information
+    INFORMATION_NOT_EXIST(9002),
+
     EMPTY_UPLOAD_FILE(6000);
 
     private int value;

@@ -38,7 +38,7 @@
   </select>
   <select id="selectByTypeAndStartIdAndLimitAndAsc" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>,itd.name as informationTypeName,isd.name as informationSubtypeName
+    <include refid="Base_Column_List"/>,itd.name as informationTypeName,isd.name as informationSubtypeName,i.id as id
     from information i,information_type_dictionary itd,information_subtype_dictionary isd
     <where>
       i.information_type_id = itd.id and i.information_subtype_id = isd.id

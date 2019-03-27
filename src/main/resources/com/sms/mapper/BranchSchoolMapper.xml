@@ -33,6 +33,11 @@
     from branch_school
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByBranchSchoolId" resultType="com.sms.model.BranchSchool">
+    select
+    bs.id as id ,bs.name ,s.id as schoolId,s.name as schoolName
+    from school s,branch_school bs where bs.school_id = s.id and bs.id = #{value} limit 1;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

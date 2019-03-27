@@ -1,5 +1,7 @@
 package com.sms.controller;
 
+import com.sms.common.CommandCode;
+import com.sms.common.CommandResult;
 import com.sms.common.ControllerBase;
 import com.sms.common.DataQueryResult;
 import com.sms.common.pagination.PaginationData;
@@ -37,5 +39,19 @@ public class InformationController extends ControllerBase {
         DataQueryResult<JSONObject> jsonObjectDataQueryResult = GetPaginationData(request);
         return jsonObjectDataQueryResult;
     }
+
+    @ApiOperation(value = "Get information", notes = "Get information")
+    @RequestMapping(value = "/Information/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommandResult getInformationById(HttpServletRequest request, @PathVariable Integer id){
+        try {
+            logger.debug(String.format("Get information id = %s",id));
+            return informationService.getInformation(id);
+        } catch (Exception ex) {
+            logger.error("Exception : " + ex.getMessage());
+            return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());
+        }
+    }
+
 
 }
