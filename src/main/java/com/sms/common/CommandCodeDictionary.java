@@ -3,66 +3,66 @@ package com.sms.common;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandCodeDictionary 
+public class CommandCodeDictionary
 {
 	private static final Map<CommandCode, String> commandCodeMap = new HashMap<>();
-	
-	static 
+
+	static
 	{
-		commandCodeMap.put(CommandCode.INTERNAL_ERROR, "ÏµÍ³´íÎó¡£"); // "Unknown error"
-		commandCodeMap.put(CommandCode.OK, "²Ù×÷³É¹¦¡£"); //"OK"
-		commandCodeMap.put(CommandCode.EMPTY_REQUEST_BODY, "ÇëÇóÃüÁîÊı¾İÎª¿Õ¡£"); // "Empty http request body."
-		commandCodeMap.put(CommandCode.USER_NOT_LOGGED_IN, "ÓÃ»§»¹Ã»ÓĞµÇÂ¼¡£"); // "User has not logged in."
-		commandCodeMap.put(CommandCode.NO_ACCESS_PERMISSION, "ÄúÃ»ÓĞ¸Ä²Ù×÷È¨ÏŞ¡£"); // "User has no access permission."
-		commandCodeMap.put(CommandCode.PASSWORD_HASHING_FAILED, "ÃÜÂë¹şÏ£Ê§°Ü¡£"); //"Failed to hash password"
-		
-		commandCodeMap.put(CommandCode.MISSING_ID, "IDÎª¿Õ"); // "Missing ID."
-		commandCodeMap.put(CommandCode.SCHOOL_ID_NOT_EXIST, "Ó×¶ùÔ°ºÅ²»´æÔÚ¡£"); // "Missing school ID."
-		commandCodeMap.put(CommandCode.BRANCH_SCHOOL_ID_NOT_EXIST, "·ÖÔ°ºÅ²»´æÔÚ¡£"); // "Missing branch school ID."
-		commandCodeMap.put(CommandCode.GROUP_ID_NOT_EXIST, "°à¼¶ºÅ²»´æÔÚ¡£"); // "Missing group school ID."
-		
-		commandCodeMap.put(CommandCode.EMPTY_USER_LOGNAME, "ÓÃ»§µÇÂ¼Ãû²»ÄÜÎª¿Õ¡£"); // "User log name is empty."
-		commandCodeMap.put(CommandCode.EMPTY_PASSWORD, "ÃÜÂë²»ÄÜÎª¿Õ¡£"); // "Password is empty."
-		commandCodeMap.put(CommandCode.USER_NOT_EXIST, "ÓÃ»§²»´æÔÚ¡£"); // "User does not exist."
-		commandCodeMap.put(CommandCode.INCORRECT_PASSWORD, "ÃÜÂë´íÎó¡£"); // "Incorrect password."
-		commandCodeMap.put(CommandCode.USER_WITH_SAME_LOGNAME_ALREADY_EXISTS, "ÓÃ»§ÒÑ´æÔÚ¡£"); // "User with same log name already exists."
-		commandCodeMap.put(CommandCode.USER_WITH_SAME_NAME_ALREADY_EXISTS, "ÓÃ»§ÒÑ´æÔÚ¡£"); // "User with same name already exists."
-		commandCodeMap.put(CommandCode.EMPTY_USER_NAME, "ÓÃ»§ĞÕÃû²»ÄÜÎª¿Õ¡£"); // "User name is empty."
-		commandCodeMap.put(CommandCode.UNKNOWN_ROLE_TYPE, "ÎŞĞ§µÄÖ°Î»ÀàĞÍ¡£"); // "Unknown role type."
-		commandCodeMap.put(CommandCode.EMPTY_OLD_PASSWORD, "¾ÉÃÜÂë²»ÄÜÎª¿Õ¡£"); // "Old password is empty."
-		commandCodeMap.put(CommandCode.EMPTY_NEW_PASSWORD, "ĞÂÃÜÂë²»ÄÜÎª¿Õ¡£"); // "New password is empty."
-		commandCodeMap.put(CommandCode.NEW_PASSWORD_IDENTICAL_TO_OLD_PASSWORD, "¾ÉÃÜÂëºÍĞÂÃÜÂë±ØĞë²»Í¬¡£"); // "New password is identical to old password."
-		
-		commandCodeMap.put(CommandCode.EMPTY_SCHOOL_NAME, "Ó×¶ùÔ°Ãû³Æ²»ÄÜÎª¿Õ¡£"); // "School name is empty."
-		commandCodeMap.put(CommandCode.SCHOOL_WITH_SAME_NAME_ALREADY_EXISTS, "¸ÃÓ×¶ùÔ°ÒÑ´æÔÚ¡£"); // "School with same name already exists."
-		commandCodeMap.put(CommandCode.SCHOOL_NOT_EXIST, "¸ÃÓ×¶ùÔ°²»´æÔÚ¡£"); //"School does not exist."
-		
-		commandCodeMap.put(CommandCode.EMPTY_BRANCH_SCHOOL_NAME, "·ÖÔ°Ãû³Æ²»ÄÜÎª¿Õ¡£"); // "Branch school name is empty."
-		commandCodeMap.put(CommandCode.BRANCH_SCHOOL_WITH_SAME_NAME_ALREADY_EXISTS, "¸Ã·ÖÔ°ÒÑ´æÔÚ¡£"); // "Branch school with same name already exists."
-		commandCodeMap.put(CommandCode.BRANCH_SCHOOL_NOT_EXIST, "¸Ã·ÖÔ°²»´æÔÚ¡£"); //"Branch school does not exist."
-		
-		commandCodeMap.put(CommandCode.EMPTY_GROUP_NAME, "°à¼¶Ãû³Æ²»ÄÜÎª¿Õ¡£"); // "Group name is empty."
-		commandCodeMap.put(CommandCode.GROUP_WITH_SAME_NAME_ALREADY_EXISTS, "¸Ã°à¼¶ÒÑ´æÔÚ¡£"); // "Group with same name already exists."
-		commandCodeMap.put(CommandCode.GROUP_NOT_EXIST, "¸Ã°à¼¶²»´æÔÚ¡£"); //"Group does not exist."
-		
-		commandCodeMap.put(CommandCode.MONITOR_NOT_EXIST, "¸Ã¼à¿Ø²»´æÔÚ¡£"); //"Monitor does not exist."
-		commandCodeMap.put(CommandCode.EMPTY_MONITOR_NAME, "¼à¿ØÃû³Æ²»ÄÜÎª¿Õ¡£"); // "Monitor name is empty."
-		commandCodeMap.put(CommandCode.EMPTY_CAMERA_ADDRESS, "ÊÓÆµµØÖ·²»ÄÜÎª¿Õ¡£"); // "Camera address is empty."
-		commandCodeMap.put(CommandCode.MONITOR_WITH_SAME_NAME_ALREADY_EXISTS, "¸Ã¼à¿ØÒÑ´æÔÚ¡£"); // "Monitor with same name already exists."
-		commandCodeMap.put(CommandCode.MONITOR_PHOTO_NOT_EXIST, "¸Ã¼à¿ØÉÏ´«µÄÍ¼Æ¬²»´æÔÚ¡£"); // "The uploaded monitor photo does not exist."
+		commandCodeMap.put(CommandCode.INTERNAL_ERROR, "ç³»ç»Ÿé”™è¯¯ã€‚"); // "Unknown error"
+		commandCodeMap.put(CommandCode.OK, "æ“ä½œæˆåŠŸã€‚"); //"OK"
+		commandCodeMap.put(CommandCode.EMPTY_REQUEST_BODY, "è¯·æ±‚å‘½ä»¤æ•°æ®ä¸ºç©ºã€‚"); // "Empty http request body."
+		commandCodeMap.put(CommandCode.USER_NOT_LOGGED_IN, "ç”¨æˆ·è¿˜æ²¡æœ‰ç™»å½•ã€‚"); // "User has not logged in."
+		commandCodeMap.put(CommandCode.NO_ACCESS_PERMISSION, "æ‚¨æ²¡æœ‰æ”¹æ“ä½œæƒé™ã€‚"); // "User has no access permission."
+		commandCodeMap.put(CommandCode.PASSWORD_HASHING_FAILED, "å¯†ç å“ˆå¸Œå¤±è´¥ã€‚"); //"Failed to hash password"
 
-		commandCodeMap.put(CommandCode.EMPTY_MEMBER_NAME, "»áÔ±Ãû³Æ²»ÄÜÎª¿Õ¡£");
-		commandCodeMap.put(CommandCode.MEMBER_WITH_SAME_NAME_ALREADY_EXISTS,"¸Ã»áÔ±ÒÑ´æÔÚ¡£");
-		commandCodeMap.put(CommandCode.MEMBER_NOT_EXIST, "¸Ã»áÔ±²»´æÔÚ¡£");
+		commandCodeMap.put(CommandCode.MISSING_ID, "IDä¸ºç©º"); // "Missing ID."
+		commandCodeMap.put(CommandCode.SCHOOL_ID_NOT_EXIST, "å¹¼å„¿å›­å·ä¸å­˜åœ¨ã€‚"); // "Missing school ID."
+		commandCodeMap.put(CommandCode.BRANCH_SCHOOL_ID_NOT_EXIST, "åˆ†å›­å·ä¸å­˜åœ¨ã€‚"); // "Missing branch school ID."
+		commandCodeMap.put(CommandCode.GROUP_ID_NOT_EXIST, "ç­çº§å·ä¸å­˜åœ¨ã€‚"); // "Missing group school ID."
 
-		commandCodeMap.put(CommandCode.EMPTY_FEE_NAME,"×Ê·ÑÃû³Æ²»ÄÜÎª¿Õ¡£");
-		commandCodeMap.put(CommandCode.FEE_NOT_EXIST,"¸Ã×Ê·Ñ²»´æÔÚ¡£");
-		commandCodeMap.put(CommandCode.FEE_TYPE_NOT_EXIST,"¸Ã×Ê·ÑÀàĞÍ²»´æÔÚ¡£");
+		commandCodeMap.put(CommandCode.EMPTY_USER_LOGNAME, "ç”¨æˆ·ç™»å½•åä¸èƒ½ä¸ºç©ºã€‚"); // "User log name is empty."
+		commandCodeMap.put(CommandCode.EMPTY_PASSWORD, "å¯†ç ä¸èƒ½ä¸ºç©ºã€‚"); // "Password is empty."
+		commandCodeMap.put(CommandCode.USER_NOT_EXIST, "ç”¨æˆ·ä¸å­˜åœ¨ã€‚"); // "User does not exist."
+		commandCodeMap.put(CommandCode.INCORRECT_PASSWORD, "å¯†ç é”™è¯¯ã€‚"); // "Incorrect password."
+		commandCodeMap.put(CommandCode.USER_WITH_SAME_LOGNAME_ALREADY_EXISTS, "ç”¨æˆ·å·²å­˜åœ¨ã€‚"); // "User with same log name already exists."
+		commandCodeMap.put(CommandCode.USER_WITH_SAME_NAME_ALREADY_EXISTS, "ç”¨æˆ·å·²å­˜åœ¨ã€‚"); // "User with same name already exists."
+		commandCodeMap.put(CommandCode.EMPTY_USER_NAME, "ç”¨æˆ·å§“åä¸èƒ½ä¸ºç©ºã€‚"); // "User name is empty."
+		commandCodeMap.put(CommandCode.UNKNOWN_ROLE_TYPE, "æ— æ•ˆçš„èŒä½ç±»å‹ã€‚"); // "Unknown role type."
+		commandCodeMap.put(CommandCode.EMPTY_OLD_PASSWORD, "æ—§å¯†ç ä¸èƒ½ä¸ºç©ºã€‚"); // "Old password is empty."
+		commandCodeMap.put(CommandCode.EMPTY_NEW_PASSWORD, "æ–°å¯†ç ä¸èƒ½ä¸ºç©ºã€‚"); // "New password is empty."
+		commandCodeMap.put(CommandCode.NEW_PASSWORD_IDENTICAL_TO_OLD_PASSWORD, "æ—§å¯†ç å’Œæ–°å¯†ç å¿…é¡»ä¸åŒã€‚"); // "New password is identical to old password."
 
-		commandCodeMap.put(CommandCode.INFORMATION_NOT_EXIST,"¸ÃÍ¨Öª²»´æÔÚ¡£");
-		commandCodeMap.put(CommandCode.EMPTY_UPLOAD_FILE, "ÉÏ´«ÎÄ¼şÎª¿Õ¡£"); // "Upload file is empty."
+		commandCodeMap.put(CommandCode.EMPTY_SCHOOL_NAME, "å¹¼å„¿å›­åç§°ä¸èƒ½ä¸ºç©ºã€‚"); // "School name is empty."
+		commandCodeMap.put(CommandCode.SCHOOL_WITH_SAME_NAME_ALREADY_EXISTS, "è¯¥å¹¼å„¿å›­å·²å­˜åœ¨ã€‚"); // "School with same name already exists."
+		commandCodeMap.put(CommandCode.SCHOOL_NOT_EXIST, "è¯¥å¹¼å„¿å›­ä¸å­˜åœ¨ã€‚"); //"School does not exist."
+
+		commandCodeMap.put(CommandCode.EMPTY_BRANCH_SCHOOL_NAME, "åˆ†å›­åç§°ä¸èƒ½ä¸ºç©ºã€‚"); // "Branch school name is empty."
+		commandCodeMap.put(CommandCode.BRANCH_SCHOOL_WITH_SAME_NAME_ALREADY_EXISTS, "è¯¥åˆ†å›­å·²å­˜åœ¨ã€‚"); // "Branch school with same name already exists."
+		commandCodeMap.put(CommandCode.BRANCH_SCHOOL_NOT_EXIST, "è¯¥åˆ†å›­ä¸å­˜åœ¨ã€‚"); //"Branch school does not exist."
+
+		commandCodeMap.put(CommandCode.EMPTY_GROUP_NAME, "ç­çº§åç§°ä¸èƒ½ä¸ºç©ºã€‚"); // "Group name is empty."
+		commandCodeMap.put(CommandCode.GROUP_WITH_SAME_NAME_ALREADY_EXISTS, "è¯¥ç­çº§å·²å­˜åœ¨ã€‚"); // "Group with same name already exists."
+		commandCodeMap.put(CommandCode.GROUP_NOT_EXIST, "è¯¥ç­çº§ä¸å­˜åœ¨ã€‚"); //"Group does not exist."
+
+		commandCodeMap.put(CommandCode.MONITOR_NOT_EXIST, "è¯¥ç›‘æ§ä¸å­˜åœ¨ã€‚"); //"Monitor does not exist."
+		commandCodeMap.put(CommandCode.EMPTY_MONITOR_NAME, "ç›‘æ§åç§°ä¸èƒ½ä¸ºç©ºã€‚"); // "Monitor name is empty."
+		commandCodeMap.put(CommandCode.EMPTY_CAMERA_ADDRESS, "è§†é¢‘åœ°å€ä¸èƒ½ä¸ºç©ºã€‚"); // "Camera address is empty."
+		commandCodeMap.put(CommandCode.MONITOR_WITH_SAME_NAME_ALREADY_EXISTS, "è¯¥ç›‘æ§å·²å­˜åœ¨ã€‚"); // "Monitor with same name already exists."
+		commandCodeMap.put(CommandCode.MONITOR_PHOTO_NOT_EXIST, "è¯¥ç›‘æ§ä¸Šä¼ çš„å›¾ç‰‡ä¸å­˜åœ¨ã€‚"); // "The uploaded monitor photo does not exist."
+
+		commandCodeMap.put(CommandCode.EMPTY_MEMBER_NAME, "ä¼šå‘˜åç§°ä¸èƒ½ä¸ºç©ºã€‚");
+		commandCodeMap.put(CommandCode.MEMBER_WITH_SAME_NAME_ALREADY_EXISTS,"è¯¥ä¼šå‘˜å·²å­˜åœ¨ã€‚");
+		commandCodeMap.put(CommandCode.MEMBER_NOT_EXIST, "è¯¥ä¼šå‘˜ä¸å­˜åœ¨ã€‚");
+
+		commandCodeMap.put(CommandCode.EMPTY_FEE_NAME,"èµ„è´¹åç§°ä¸èƒ½ä¸ºç©ºã€‚");
+		commandCodeMap.put(CommandCode.FEE_NOT_EXIST,"è¯¥èµ„è´¹ä¸å­˜åœ¨ã€‚");
+		commandCodeMap.put(CommandCode.FEE_TYPE_NOT_EXIST,"è¯¥èµ„è´¹ç±»å‹ä¸å­˜åœ¨ã€‚");
+
+		commandCodeMap.put(CommandCode.INFORMATION_NOT_EXIST,"è¯¥é€šçŸ¥ä¸å­˜åœ¨ã€‚");
+		commandCodeMap.put(CommandCode.EMPTY_UPLOAD_FILE, "ä¸Šä¼ æ–‡ä»¶ä¸ºç©ºã€‚"); // "Upload file is empty."
 	}
-	
+
 	public static String getCodeMessage(CommandCode code)
 	{
 		return commandCodeMap.get(code);

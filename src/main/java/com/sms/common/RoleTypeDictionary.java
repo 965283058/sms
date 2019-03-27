@@ -9,10 +9,10 @@ public class RoleTypeDictionary
 	
 	static 
 	{
-		roleTypeMap.put(RoleType.ADMINISTRATOR, "ÏµÍ³¹ÜÀíÔ±");
-		roleTypeMap.put(RoleType.PRESIDENT, "Ğ£³¤");
-		roleTypeMap.put(RoleType.DIRECTOR, "Ô°³¤");
-		roleTypeMap.put(RoleType.GROUOP_LEADER, "°àÖ÷ÈÎ");
+		roleTypeMap.put(RoleType.ADMINISTRATOR, "ç³»ç»Ÿç®¡ç†å‘˜");
+		roleTypeMap.put(RoleType.PRESIDENT, "æ ¡é•¿");
+		roleTypeMap.put(RoleType.DIRECTOR, "å›­é•¿");
+		roleTypeMap.put(RoleType.GROUOP_LEADER, "ç­ä¸»ä»»");
 	}
 	
 	public static String getRoleTypeName(RoleType roleType)

@@ -45,7 +45,7 @@ public class LoginFilter implements Filter {
 		if (sessionManager.isValidSession(sessionId)) {
 		arg2.doFilter(arg0, arg1);
 	    } else {
-		// 没有校验通过，表示用户身份需要认证，此时需要跳转到登录页面
+
 		response.sendRedirect(basePath + "/jsp/login.jsp");
 	    }
 	}
