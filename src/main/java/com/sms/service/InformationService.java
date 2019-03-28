@@ -25,9 +25,9 @@ public class InformationService extends ServiceBase implements IInformationServi
 
         Integer totalInformationCount = 0;
         List<Information> informationList = null;
-        switch (paginationData.getPageMode()){
+        switch (paginationData.getPageMode()) {
             case NEXT_PAGE:
-                informationList = informationMapper.selectByTypeAndStartIdAndLimitAndAsc(typeId, subtypeId,paginationData.getQueryId(),paginationData.getCountPerPage());
+                informationList = informationMapper.selectByTypeAndStartIdAndLimitAndAsc(typeId, subtypeId, paginationData.getQueryId(), paginationData.getCountPerPage());
                 break;
             case PRE_PAGE:
                 informationList = informationMapper.selectByTypeAndStartIdAndLimitAndDesc(typeId, subtypeId, paginationData.getQueryId(), paginationData.getCountPerPage());
@@ -37,16 +37,16 @@ public class InformationService extends ServiceBase implements IInformationServi
         }
 
         totalInformationCount = informationMapper.getCountByType(typeId, subtypeId);
-        if(totalInformationCount > 0){
+        if (totalInformationCount > 0) {
             result = new DataQueryResult<>(totalInformationCount);
             informationList.forEach(information -> {
                 BranchSchool branchSchool = branchSchoolMapper.selectByBranchSchoolId(information.getBranchSchoolId());
-                if(null != branchSchool){
+                if (null != branchSchool) {
                     information.setBranchSchoolName(branchSchool.getName());
                     information.setSchoolName(branchSchool.getSchoolName());
                 }
                 User user = userMapper.selectByPrimaryKey(information.getUserId());
-                if(null != user){
+                if (null != user) {
                     information.setUserName(user.getName());
                 }
             });
@@ -60,38 +60,68 @@ public class InformationService extends ServiceBase implements IInformationServi
 
     @Override
     public CommandResult getInformation(Integer id) {
-        if( null == id){
+        if (null == id) {
             return new CommandResult(CommandCode.MISSING_ID.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.MISSING_ID));
         }
         Information information = informationMapper.selectByPrimaryKey(id);
-        if(null == information){
+        if (null == information) {
             return new CommandResult(CommandCode.INFORMATION_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_NOT_EXIST));
         }
 
         BranchSchool branchSchool = branchSchoolMapper.selectByBranchSchoolId(information.getBranchSchoolId());
 
-        if(null != branchSchool){
+        if (null != branchSchool) {
             information.setBranchSchoolName(branchSchool.getName());
             information.setSchoolName(branchSchool.getSchoolName());
         }
 
         User user = userMapper.selectByPrimaryKey(information.getUserId());
-        if(null != user){
+        if (null != user) {
             information.setUserName(user.getName());
         }
 
         InformationTypeDictionary informationTypeDictionary = informationTypeDictionaryMapper.selectByPrimaryKey(information.getInformationTypeId());
-        if(null != informationTypeDictionary){
+        if (null != informationTypeDictionary) {
             information.setInformationTypeName(informationTypeDictionary.getName());
         }
 
         InformationSubtypeDictionary informationSubtypeDictionary = informationSubtypeDictionaryMapper.selectByPrimaryKey(information.getInformationSubtypeId());
-        if(null != informationSubtypeDictionary){
+        if (null != informationSubtypeDictionary) {
             information.setInformationSubtypeName(informationSubtypeDictionary.getName());
         }
 
-        InformationVO  informationVO = InformationDataHelper.convertInformationToInformationVO(information);
+        InformationVO informationVO = InformationDataHelper.convertInformationToInformationVO(information);
 
-        return new CommandResult(CommandCode.OK.getCode(),CommandCodeDictionary.getCodeMessage(CommandCode.OK),informationVO.serializeToJSONObject());
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK), informationVO.serializeToJSONObject());
+    }
+
+    @Override
+    public synchronized CommandResult createInformation(User user, InformationVO informationVO) {
+        if (null == user) {
+            user = new User();
+            user.setId(1);
+//            return new CommandResult(CommandCode.USER_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.USER_NOT_EXIST));
+        }
+
+        Information information = InformationDataHelper.convertInformationVoToInformation(informationVO);
+        BranchSchool branchSchool = branchSchoolMapper.selectByPrimaryKey(information.getBranchSchoolId());
+        if (null == branchSchool) {
+            return new CommandResult(CommandCode.BRANCH_SCHOOL_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.BRANCH_SCHOOL_NOT_EXIST));
+        }
+        School school = schoolMapper.selectByPrimaryKey(information.getSchoolId());
+        if (null == school) {
+            return new CommandResult(CommandCode.SCHOOL_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.SCHOOL_NOT_EXIST));
+        }
+        InformationTypeDictionary informationTypeDictionary = informationTypeDictionaryMapper.selectByPrimaryKey(information.getInformationTypeId());
+        if (null == informationTypeDictionary) {
+            return new CommandResult(CommandCode.INFORMATION_TYPE_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_TYPE_NOT_EXIST));
+        }
+        InformationSubtypeDictionary informationSubtypeDictionary = informationSubtypeDictionaryMapper.selectByPrimaryKey(information.getInformationSubtypeId());
+        if (null == informationSubtypeDictionary) {
+            return new CommandResult(CommandCode.INFORMATION_SUBTYPE_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_SUBTYPE_NOT_EXIST));
+        }
+        information.setUserId(user.getId());
+        informationMapper.insert(information);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
     }
 }

@@ -30,6 +30,11 @@ public class InformationDataHelper {
 		return vo;
 	}
 
+	public static Information convertInformationVoToInformation(InformationVO informationVO){
+		Information information = new Information();
+		BeanUtils.copyProperties(informationVO,information);
+		return information;
+	}
 //
 //	public static Member convertMemberVOToMember(MemberVO memberVO) {
 //		Member member = new Member();

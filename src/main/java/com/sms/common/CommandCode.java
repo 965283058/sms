@@ -66,6 +66,8 @@ public enum CommandCode
     //Information
     INFORMATION_NOT_EXIST(9002),
 
+    INFORMATION_TYPE_NOT_EXIST(10002),
+    INFORMATION_SUBTYPE_NOT_EXIST(11002),
     EMPTY_UPLOAD_FILE(6000);
 
     private int value;
