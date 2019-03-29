@@ -11,6 +11,7 @@
     </settings>
     
     <mappers>
+		<mapper resource="com/sms/mapper/FileMapper.xml"/>
     	<mapper resource="com/sms/mapper/FeeTypeMapper.xml"/>
 		<mapper resource="com/sms/mapper/FeeMapper.xml"/>
     	<mapper resource="com/sms/mapper/UserMapper.xml"/>

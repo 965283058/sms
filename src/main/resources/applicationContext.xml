@@ -1,122 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
-	xmlns:tx="http://www.springframework.org/schema/tx" 
-	xmlns:aop="http://www.springframework.org/schema/aop" 
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
 	 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
 	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config />
-	<context:component-scan base-package="com.sms" />
+    <context:annotation-config/>
+    <context:component-scan base-package="com.sms"/>
 
-	<mvc:annotation-driven>
-		<mvc:message-converters register-defaults="true">
-			<!-- 返回成String 时的编码方式 -->
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-				<constructor-arg value="UTF-8" />
-			</bean>
-			<bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean>
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-	
-	<aop:aspectj-autoproxy  proxy-target-class="false"/>
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- 返回成String 时的编码方式 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <bean class="org.springframework.http.converter.FormHttpMessageConverter"></bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-	<!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+
+    <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
     <mvc:default-servlet-handler/>
     <!-- 静态资源映射 -->
-	<mvc:resources mapping="/images/**" location="/images/" />
-    <mvc:resources mapping="/css/**" location="/css/" />
-    <mvc:resources mapping="/js/**" location="/js/" />
-    <mvc:resources mapping="/web/img/**" location="/web/img/" /> 
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/web/img/**" location="/web/img/"/>
     <!--<mvc:resources location="/" mapping="/**"></mvc:resources>-->
-    
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	
-	<mvc:interceptors>
-		<!--多个拦截器,顺序执行 -->
-	    <mvc:interceptor>
-	    	<!-- 表示拦截所有的url，包括子url路径 -->
-	        <mvc:mapping path="/**" />
-	        <mvc:exclude-mapping path="/fonts/*"/>
-	        <mvc:exclude-mapping path="/**/*.css"/>
-	        <mvc:exclude-mapping path="/**/*.js"/>
-	        <mvc:exclude-mapping path="/**/*.png"/>
-	        <mvc:exclude-mapping path="/**/*.gif"/>
-	        <mvc:exclude-mapping path="/**/*.jpg"/>
-	        <mvc:exclude-mapping path="/**/*.jpeg"/>
-	        <mvc:exclude-mapping path="/**/*login*"/>
-	        <mvc:exclude-mapping path="/**/Logon"/>
-	        <bean class="com.sms.interceptor.AccessInterceptor"></bean>
-	    </mvc:interceptor>
-	</mvc:interceptors>
-	
-	<bean id="applicationContextHelper" class="com.sms.common.ApplicationContextHelper"></bean>
-	<bean id="loginFilter" class="com.sms.filter.LoginFilter"></bean>
-	<bean id="sessionManager" class="com.sms.authentication.SessionManager" scope="singleton"></bean>
 
-	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding" value="UTF-8"/>  
-    	<!-- 指定所上传文件的总大小不能超过4G。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
-     	<property name="maxUploadSize" value="4096000000" />
-     	<property name="maxInMemorySize" value="4096000" />
-  	</bean>  
-  
-	<!-- - - - - - - - 连接池 - - - - - - - -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <mvc:interceptors>
+        <!--多个拦截器,顺序执行 -->
+        <mvc:interceptor>
+            <!-- 表示拦截所有的url，包括子url路径 -->
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/fonts/*"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.png"/>
+            <mvc:exclude-mapping path="/**/*.gif"/>
+            <mvc:exclude-mapping path="/**/*.jpg"/>
+            <mvc:exclude-mapping path="/**/*.jpeg"/>
+            <mvc:exclude-mapping path="/**/*login*"/>
+            <mvc:exclude-mapping path="/**/Logon"/>
+            <bean class="com.sms.interceptor.AccessInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="applicationContextHelper" class="com.sms.common.ApplicationContextHelper"></bean>
+    <bean id="loginFilter" class="com.sms.filter.LoginFilter"></bean>
+    <bean id="sessionManager" class="com.sms.authentication.SessionManager" scope="singleton"></bean>
+
+    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 指定所上传文件的总大小不能超过4G。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="4096000000"/>
+        <property name="maxInMemorySize" value="4096000"/>
+    </bean>
+
+    <!-- - - - - - - - 连接池 - - - - - - - -->
     <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
         <property name="driverClass">
-			<value>com.mysql.jdbc.Driver</value>
-		</property>
-		<property name="jdbcUrl">
-			<value>jdbc:mysql://39.96.211.124:3306/sms?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</value>
-		</property>
-		<property name="username">
-			<value>root</value>
-		</property>
-		<property name="password">
-			<value>1qaz2wsx</value>
-		</property>
-		<property name="idleConnectionTestPeriodInMinutes" value="5" />
-		<property name="idleMaxAgeInMinutes" value="20" />
-		<property name="maxConnectionsPerPartition" value="3" />
-		<property name="minConnectionsPerPartition" value="3" />
-		<property name="partitionCount" value="3" />
-		<property name="acquireIncrement" value="3" />
-		<property name="statementsCacheSize" value="100" />
-		<property name="releaseHelperThreads" value="3" />
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>jdbc:mysql://39.96.211.124:3306/sms?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</value>
+        </property>
+        <property name="username">
+            <value>root</value>
+        </property>
+        <property name="password">
+            <value>1qaz2wsx</value>
+        </property>
+        <property name="idleConnectionTestPeriodInMinutes" value="5"/>
+        <property name="idleMaxAgeInMinutes" value="20"/>
+        <property name="maxConnectionsPerPartition" value="3"/>
+        <property name="minConnectionsPerPartition" value="3"/>
+        <property name="partitionCount" value="3"/>
+        <property name="acquireIncrement" value="3"/>
+        <property name="statementsCacheSize" value="100"/>
+        <property name="releaseHelperThreads" value="3"/>
     </bean>
-    
+
     <!-- - - - - - - - sessionFactory - - - - - - - -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    	
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="typeAliasesPackage" value="com.sms.model" />
+        <property name="typeAliasesPackage" value="com.sms.model"/>
     </bean>
-    
-    <!-- scan for mappers and let them be autowired -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="annotationClass" value="org.springframework.stereotype.Repository"></property>
-		<property name="basePackage" value="com.sms.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-		<!-- 
-		改用sqlSessionFactoryBeanName注入就没有问题(不要使用sqlSessionFactory属性注入，使用sqlSessionFactoryBeanName注入)，
-		因为这时不会立即初始化sqlSessionFactory,传入的只是名字，非bean，所以不会引发提前初始化问题。。避免了属性文件不能加载的问题
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
-	</bean>
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
-	</bean>
-	
-	<tx:annotation-driven transaction-manager="transactionManager" />  
 
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"></property>
+        <property name="basePackage" value="com.sms.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--
+        改用sqlSessionFactoryBeanName注入就没有问题(不要使用sqlSessionFactory属性注入，使用sqlSessionFactoryBeanName注入)，
+        因为这时不会立即初始化sqlSessionFactory,传入的只是名字，非bean，所以不会引发提前初始化问题。。避免了属性文件不能加载的问题
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <array>
+                <value>classpath:app.properties</value>
+            </array>
+        </property>
+    </bean>
 </beans>

@@ -9,6 +9,9 @@ import com.sms.authentication.SessionManager;
 
 public abstract class ServiceBase {
 	@Autowired
+	protected FileMapper fileMapper;
+
+	@Autowired
 	protected UserMapper userMapper;
 	
 	@Autowired
