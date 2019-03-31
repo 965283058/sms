@@ -70,7 +70,7 @@ public class FileController extends ControllerBase {
 
             }
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("path",path + File.separator + f.getName());
+            jsonObject.put("path",f.getName());
             jsonObject.put("type",type);
             return new CommandResult(CommandCode.OK.getCode(),CommandCodeDictionary.getCodeMessage(CommandCode.OK),jsonObject);
         } catch (Exception ex) {

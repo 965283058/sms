@@ -72,4 +72,15 @@ public class InformationController extends ControllerBase {
         }
     }
 
+    @ApiOperation(value = "Delete Information", notes = "Delete Information")
+    @RequestMapping(value = "/Information/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public CommandResult deleteInformation(@PathVariable Integer id){
+        try {
+            return informationService.deleteInformation(id);
+        } catch (Exception ex) {
+            logger.error("Exception : " + ex.getMessage());
+            return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());
+        }
+    }
 }
