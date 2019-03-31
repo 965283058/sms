@@ -10,6 +10,7 @@ import com.sms.common.pagination.PaginationData;
 import com.sms.model.*;
 import com.sms.vo.InformationVO;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -122,6 +123,98 @@ public class InformationService extends ServiceBase implements IInformationServi
         }
         information.setUserId(user.getId());
         informationMapper.insert(information);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public CommandResult deleteInformation(Integer id) {
+        informationMapper.deleteByPrimaryKey(id);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public DataQueryResult<InformationTypeDictionary> getInformationTypes() {
+        DataQueryResult<InformationTypeDictionary> result = new DataQueryResult<InformationTypeDictionary>(0);
+        List<InformationTypeDictionary> informationTypeDictionaryList =  informationTypeDictionaryMapper.selectAll();
+        if(null != informationTypeDictionaryList){
+            result = new DataQueryResult<>(informationTypeDictionaryList.size());
+            result.setDataset(informationTypeDictionaryList);
+        }
+        return result;
+    }
+
+    @Override
+    public InformationTypeDictionary getInformationType(Integer id) {
+        return informationTypeDictionaryMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public CommandResult updateInformationType(Integer id, String name) {
+        if(StringUtils.isBlank(name)){
+            return new CommandResult(CommandCode.EMPTY_INFORMATION_TYPE_NAME.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_INFORMATION_TYPE_NAME));
+        }
+        InformationTypeDictionary informationTypeDictionary = new InformationTypeDictionary();
+        informationTypeDictionary.setId(id);
+        informationTypeDictionary.setName(name);
+        informationTypeDictionaryMapper.updateByPrimaryKey(informationTypeDictionary);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public synchronized CommandResult createInformationType(InformationTypeDictionary informationTypeDictionary) {
+        if(null == informationTypeDictionary || StringUtils.isBlank(informationTypeDictionary.getName())){
+            return new CommandResult(CommandCode.EMPTY_INFORMATION_TYPE_NAME.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_INFORMATION_TYPE_NAME));
+        }
+        informationTypeDictionaryMapper.insert(informationTypeDictionary);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public CommandResult deleteInformationType(Integer id) {
+        informationTypeDictionaryMapper.deleteByPrimaryKey(id);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public DataQueryResult<InformationSubtypeDictionary> getInformationSubtypes() {
+        DataQueryResult<InformationSubtypeDictionary> result = new DataQueryResult<>(0);
+        List<InformationSubtypeDictionary> informationSubtypeDictionaryList = informationSubtypeDictionaryMapper.selectAll();
+        if(null != informationSubtypeDictionaryList){
+            result = new DataQueryResult<>(informationSubtypeDictionaryList.size());
+            result.setDataset(informationSubtypeDictionaryList);
+        }
+        return result;
+    }
+
+    @Override
+    public InformationSubtypeDictionary getInformationSubtype(Integer id) {
+        return informationSubtypeDictionaryMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public CommandResult updateInformationSubtype(Integer id, String name) {
+        if(StringUtils.isBlank(name)){
+            return new CommandResult(CommandCode.EMPTY_INFORMATION_SUBTYPE_NAME.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_INFORMATION_SUBTYPE_NAME));
+        }
+        InformationSubtypeDictionary informationSubtypeDictionary =  new InformationSubtypeDictionary();
+        informationSubtypeDictionary.setId(id);
+        informationSubtypeDictionary.setName(name);
+        informationSubtypeDictionaryMapper.updateByPrimaryKey(informationSubtypeDictionary);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public synchronized CommandResult createInformationSubtype(InformationSubtypeDictionary informationSubtypeDictionary) {
+        if(null == informationSubtypeDictionary || StringUtils.isBlank(informationSubtypeDictionary.getName())){
+            return new CommandResult(CommandCode.EMPTY_INFORMATION_SUBTYPE_NAME.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_INFORMATION_SUBTYPE_NAME));
+        }
+        informationSubtypeDictionaryMapper.insert(informationSubtypeDictionary);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public CommandResult deleteInformationSubtype(Integer id) {
+        informationSubtypeDictionaryMapper.deleteByPrimaryKey(id);
         return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
     }
 }

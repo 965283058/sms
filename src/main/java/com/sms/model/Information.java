@@ -79,12 +79,12 @@ public class Information {
         this.createdTime = createdTime;
     }
 
-    public String getContentFilePath() {
-        return contentFilePath;
+    public String getContent() {
+        return content;
     }
 
-    public void setContentFilePath(String contentFilePath) {
-        this.contentFilePath = contentFilePath;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getPhotoUrl() {
@@ -151,7 +151,7 @@ public class Information {
 
     private Date createdTime;
 
-    private String contentFilePath;
+    private String content;
 
     private String photoUrl;
 

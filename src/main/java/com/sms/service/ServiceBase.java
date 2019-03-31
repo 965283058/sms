@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.sms.authentication.SessionManager;
 
 public abstract class ServiceBase {
+
 	@Autowired
 	protected FileMapper fileMapper;
 

@@ -62,7 +62,9 @@ public class CommandCodeDictionary
 		commandCodeMap.put(CommandCode.FEE_TYPE_NOT_EXIST,"该资费类型不存在。");
 
 		commandCodeMap.put(CommandCode.INFORMATION_NOT_EXIST,"该通知不存在。");
+		commandCodeMap.put(CommandCode.INFORMATION_TYPE_NOT_EXIST,"通知类型名称不能为。");
 		commandCodeMap.put(CommandCode.INFORMATION_TYPE_NOT_EXIST,"该通知类型不存在。");
+		commandCodeMap.put(CommandCode.INFORMATION_SUBTYPE_NOT_EXIST,"子通知类型名称不能为空。");
 		commandCodeMap.put(CommandCode.INFORMATION_SUBTYPE_NOT_EXIST,"该子通知类型不存在。");
 		commandCodeMap.put(CommandCode.EMPTY_UPLOAD_FILE, "上传文件为空。"); // "Upload file is empty."
 	}

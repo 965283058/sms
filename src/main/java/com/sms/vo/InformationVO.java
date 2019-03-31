@@ -15,7 +15,7 @@ public class InformationVO {
     private Integer userId;
     private String userName;
     private Date createdTime;
-    private String contentFilePath;
+    private String content;
     private String photoUrl;
     private Integer schoolId;
     private String schoolName;
@@ -40,8 +40,8 @@ public class InformationVO {
         if (jsonObject.has("information_subtype_id")) {
             this.setInformationSubtypeId(jsonObject.get("information_subtype_id").equals(null) ? null : jsonObject.getInt("information_subtype_id"));
         }
-        if (jsonObject.has("content_file_path")) {
-            this.setContentFilePath(jsonObject.get("content_file_path").equals(null) ? null : jsonObject.getString("content_file_path"));
+        if (jsonObject.has("content")) {
+            this.setContent(jsonObject.get("content").equals(null) ? null : jsonObject.getString("content"));
         }
         if (jsonObject.has("photo_url")) {
             this.setPhotoUrl(jsonObject.get("photo_url").equals(null) ? null : jsonObject.getString("photo_url"));
@@ -69,7 +69,7 @@ public class InformationVO {
         jsonObject.put("user_id", userId);
         jsonObject.put("user_name", userName);
         jsonObject.put("created_time", sdf.format(createdTime));
-        jsonObject.put("content_file_path", contentFilePath);
+        jsonObject.put("content", content);
         jsonObject.put("photo_url", photoUrl);
         jsonObject.put("school_id", schoolId);
         jsonObject.put("school_name", schoolName);
@@ -151,12 +151,12 @@ public class InformationVO {
         this.createdTime = createdTime;
     }
 
-    public String getContentFilePath() {
-        return contentFilePath;
+    public String getContent() {
+        return content;
     }
 
-    public void setContentFilePath(String contentFilePath) {
-        this.contentFilePath = contentFilePath;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getPhotoUrl() {
