@@ -154,6 +154,12 @@ public class InformationService extends ServiceBase implements IInformationServi
         totalSchoolInformationCount = schoolInformationMapper.getCountByType(typeId, subtypeId);
         if (totalSchoolInformationCount > 0) {
             result = new DataQueryResult<>(totalSchoolInformationCount);
+            schoolInformationList.forEach(schoolInformation->{
+                School school = schoolMapper.selectByPrimaryKey(schoolInformation.getSchoolId());
+                if(null != school){
+                    schoolInformation.setSchoolName(school.getName());
+                }
+            });
             List<SchoolInformationVO> schoolInformationVOList = SchoolInformationDataHelper.convertSchoolInformationsToSchoolInformationVOs(schoolInformationList);
             List<JSONObject> jsonObjects = SchoolInformationDataHelper.convertSchoolInformationVOsToJSONObjects(schoolInformationVOList);
             result.setDataset(jsonObjects);
@@ -172,6 +178,11 @@ public class InformationService extends ServiceBase implements IInformationServi
             return new CommandResult(CommandCode.INFORMATION_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_NOT_EXIST));
         }
 
+        School school = schoolMapper.selectByPrimaryKey(schoolInformation.getSchoolId());
+        if(null != school){
+            schoolInformation.setSchoolName(school.getName());
+        }
+
         InformationTypeDictionary informationTypeDictionary = informationTypeDictionaryMapper.selectByPrimaryKey(schoolInformation.getInformationTypeId());
         if (null != informationTypeDictionary) {
             schoolInformation.setInformationTypeName(informationTypeDictionary.getName());
@@ -182,13 +193,14 @@ public class InformationService extends ServiceBase implements IInformationServi
             schoolInformation.setInformationSubtypeName(informationSubtypeDictionary.getName());
         }
 
+
         SchoolInformationVO schoolInformationVO = SchoolInformationDataHelper.convertSchoolInformationToSchoolInformationVO(schoolInformation);
 
         return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK), schoolInformationVO.serializeToJSONObject());
     }
 
     @Override
-    public CommandResult createSchoolInformation(User user, SchoolInformationVO schoolInformationVO) {
+    public synchronized CommandResult createSchoolInformation(User user, SchoolInformationVO schoolInformationVO) {
         if (null == user) {
             user = new User();
             user.setId(1);
