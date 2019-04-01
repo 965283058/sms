@@ -50,4 +50,7 @@ public abstract class ServiceBase {
 
 	@Autowired
 	protected InformationSubtypeDictionaryMapper informationSubtypeDictionaryMapper;
+
+	@Autowired
+	protected SchoolInformationMapper schoolInformationMapper;
 }

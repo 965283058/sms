@@ -31,7 +31,7 @@ public class InformationController extends ControllerBase {
     @ApiOperation(value = "Get Infos in page", notes = "Get  Infos in page")
     @RequestMapping(value = "/Informations", params = {"limit", "offset", "paginationData", "_"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataQueryResult<JSONObject> getMembersInPage(HttpServletRequest request, @RequestParam(required = false) Integer informationTypeId, @RequestParam(required = false) Integer informationSubtypeId) {
+    public DataQueryResult<JSONObject> getInformationsInPage(HttpServletRequest request, @RequestParam(required = false) Integer informationTypeId, @RequestParam(required = false) Integer informationSubtypeId) {
         fiGetItemsByPaginationData = (PaginationData paginationData) -> {
             return informationService.getInfosByPaginationData(informationTypeId, informationSubtypeId, paginationData);
         };

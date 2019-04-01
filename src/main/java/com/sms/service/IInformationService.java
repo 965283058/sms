@@ -7,6 +7,7 @@ import com.sms.model.InformationSubtypeDictionary;
 import com.sms.model.InformationTypeDictionary;
 import com.sms.model.User;
 import com.sms.vo.InformationVO;
+import com.sms.vo.SchoolInformationVO;
 import net.sf.json.JSONObject;
 
 public interface IInformationService {
@@ -14,6 +15,11 @@ public interface IInformationService {
     CommandResult getInformation(Integer id);
     CommandResult createInformation(User user, InformationVO informationVO);
     CommandResult deleteInformation(Integer id);
+
+    DataQueryResult<JSONObject> getSchoolInfosByPaginationData(Integer typeId, Integer subtypeId, PaginationData paginationData);
+    CommandResult getSchoolInformation(Integer id);
+    CommandResult createSchoolInformation(User user, SchoolInformationVO schoolInformationVO);
+    CommandResult deleteSchoolInformation(Integer id);
 
     DataQueryResult<InformationTypeDictionary> getInformationTypes();
     InformationTypeDictionary getInformationType(Integer id);
@@ -26,5 +32,4 @@ public interface IInformationService {
     CommandResult updateInformationSubtype(Integer id, String name);
     CommandResult createInformationSubtype(InformationSubtypeDictionary informationSubtypeDictionary);
     CommandResult deleteInformationSubtype(Integer id);
-
 }

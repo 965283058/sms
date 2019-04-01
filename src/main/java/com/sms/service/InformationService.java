@@ -6,9 +6,11 @@ import com.sms.common.CommandCodeDictionary;
 import com.sms.common.CommandResult;
 import com.sms.common.DataQueryResult;
 import com.sms.common.helper.InformationDataHelper;
+import com.sms.common.helper.SchoolInformationDataHelper;
 import com.sms.common.pagination.PaginationData;
 import com.sms.model.*;
 import com.sms.vo.InformationVO;
+import com.sms.vo.SchoolInformationVO;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -129,6 +131,90 @@ public class InformationService extends ServiceBase implements IInformationServi
     @Override
     public CommandResult deleteInformation(Integer id) {
         informationMapper.deleteByPrimaryKey(id);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public DataQueryResult<JSONObject> getSchoolInfosByPaginationData(Integer typeId, Integer subtypeId, PaginationData paginationData) {
+        DataQueryResult<JSONObject> result = new DataQueryResult<JSONObject>(0);
+
+        Integer totalSchoolInformationCount = 0;
+        List<SchoolInformation> schoolInformationList = null;
+        switch (paginationData.getPageMode()) {
+            case NEXT_PAGE:
+                schoolInformationList = schoolInformationMapper.selectByTypeAndStartIdAndLimitAndAsc(typeId, subtypeId, paginationData.getQueryId(), paginationData.getCountPerPage());
+                break;
+            case PRE_PAGE:
+                schoolInformationList = schoolInformationMapper.selectByTypeAndStartIdAndLimitAndDesc(typeId, subtypeId, paginationData.getQueryId(), paginationData.getCountPerPage());
+                break;
+            default:
+                return result;
+        }
+
+        totalSchoolInformationCount = schoolInformationMapper.getCountByType(typeId, subtypeId);
+        if (totalSchoolInformationCount > 0) {
+            result = new DataQueryResult<>(totalSchoolInformationCount);
+            List<SchoolInformationVO> schoolInformationVOList = SchoolInformationDataHelper.convertSchoolInformationsToSchoolInformationVOs(schoolInformationList);
+            List<JSONObject> jsonObjects = SchoolInformationDataHelper.convertSchoolInformationVOsToJSONObjects(schoolInformationVOList);
+            result.setDataset(jsonObjects);
+        }
+
+        return result;
+    }
+
+    @Override
+    public CommandResult getSchoolInformation(Integer id) {
+        if (null == id) {
+            return new CommandResult(CommandCode.MISSING_ID.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.MISSING_ID));
+        }
+        SchoolInformation schoolInformation = schoolInformationMapper.selectByPrimaryKey(id);
+        if (null == schoolInformation) {
+            return new CommandResult(CommandCode.INFORMATION_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_NOT_EXIST));
+        }
+
+        InformationTypeDictionary informationTypeDictionary = informationTypeDictionaryMapper.selectByPrimaryKey(schoolInformation.getInformationTypeId());
+        if (null != informationTypeDictionary) {
+            schoolInformation.setInformationTypeName(informationTypeDictionary.getName());
+        }
+
+        InformationSubtypeDictionary informationSubtypeDictionary = informationSubtypeDictionaryMapper.selectByPrimaryKey(schoolInformation.getInformationSubtypeId());
+        if (null != informationSubtypeDictionary) {
+            schoolInformation.setInformationSubtypeName(informationSubtypeDictionary.getName());
+        }
+
+        SchoolInformationVO schoolInformationVO = SchoolInformationDataHelper.convertSchoolInformationToSchoolInformationVO(schoolInformation);
+
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK), schoolInformationVO.serializeToJSONObject());
+    }
+
+    @Override
+    public CommandResult createSchoolInformation(User user, SchoolInformationVO schoolInformationVO) {
+        if (null == user) {
+            user = new User();
+            user.setId(1);
+//            return new CommandResult(CommandCode.USER_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.USER_NOT_EXIST));
+        }
+
+        SchoolInformation schoolInformation = SchoolInformationDataHelper.convertSchoolInformationVoToSchoolInformation(schoolInformationVO);
+        School school = schoolMapper.selectByPrimaryKey(schoolInformation.getSchoolId());
+        if (null == school){
+            return new CommandResult(CommandCode.SCHOOL_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.SCHOOL_NOT_EXIST));
+        }
+        InformationTypeDictionary informationTypeDictionary = informationTypeDictionaryMapper.selectByPrimaryKey(schoolInformation.getInformationTypeId());
+        if (null == informationTypeDictionary) {
+            return new CommandResult(CommandCode.INFORMATION_TYPE_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_TYPE_NOT_EXIST));
+        }
+        InformationSubtypeDictionary informationSubtypeDictionary = informationSubtypeDictionaryMapper.selectByPrimaryKey(schoolInformation.getInformationSubtypeId());
+        if (null == informationSubtypeDictionary) {
+            return new CommandResult(CommandCode.INFORMATION_SUBTYPE_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.INFORMATION_SUBTYPE_NOT_EXIST));
+        }
+        schoolInformationMapper.insert(schoolInformation);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
+
+    @Override
+    public CommandResult deleteSchoolInformation(Integer id) {
+        schoolInformationMapper.deleteByPrimaryKey(id);
         return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
     }
 

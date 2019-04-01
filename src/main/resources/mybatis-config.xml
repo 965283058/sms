@@ -23,6 +23,7 @@
     	<mapper resource="com/sms/mapper/SchoolInformationMapper.xml"/>
     	<mapper resource="com/sms/mapper/MemberMapper.xml"/>
 		<mapper resource="com/sms/mapper/InformationMapper.xml"/>
+		<mapper resource="com/sms/mapper/SchoolInformationMapper.xml"/>
 		<mapper resource="com/sms/mapper/InformationTypeDictionaryMapper.xml"/>
 		<mapper resource="com/sms/mapper/InformationSubtypeDictionaryMapper.xml"/>
 	</mappers>
