@@ -130,26 +130,17 @@
 
   <select id="selectBySchoolIdAndEndIdAndLimitAndDesc" resultType="com.sms.model.Subject">
     select
-    su.id as id, su.name as name, su.school_id as schoolId, su.management_status_id as managementStatusId,sc.name as schoolName
-    from `subject` su, school sc
-    where su.school_id = sc.id
-    and school_id = #{schoolId}
-    <![CDATA[ and su.id < #{pageEndId,jdbcType=BIGINT}]]>
-    order by su.id desc limit #{countPerPage}
-  </select>
-  <select id="selectByPageEndIdAndLimitAndDesc" resultMap="BaseResultMap" parameterType="map" >
-    select
-    id as id, name as name, school_id as schoolId, management_status_id as managementStatusId,school_name as schoolName
+    *
     from
     (
-    select
-    su.id as id, su.name as name, su.school_id as school_id,su.management_status_id as management_status_id, sc.name as school_name
-    from subject su, school sc
-    where su.school_id = sc.id
-    and school_id = #{schoolId}
-    <![CDATA[ and su.id < #{pageEndId,jdbcType=BIGINT}]]>
-    order by su.id desc limit #{countPerPage}
-    ) U
-    order by U.id ASC
+      select
+      su.id as id, su.name as name, su.school_id as schoolId, su.management_status_id as managementStatusId,sc.name as schoolName
+      from `subject` su, school sc
+      where su.school_id = sc.id
+      and school_id = #{schoolId}
+      <![CDATA[ and su.id < #{pageEndId,jdbcType=BIGINT}]]>
+      order by su.id desc limit #{countPerPage}
+    ) t
+    order by t.id asc
   </select>
 </mapper>

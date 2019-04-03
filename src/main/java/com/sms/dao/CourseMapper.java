@@ -1,8 +1,11 @@
 package com.sms.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sms.model.Course;
+
+import java.util.List;
 
 @Repository
 public interface CourseMapper {
@@ -53,4 +56,10 @@ public interface CourseMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Course record);
+
+    int getCountBySubjectId(@Param("subjectId") Integer subjectId);
+
+    List<Course> selectBySubjectIdAndStartIdAndLimitAndAsc(@Param("subjectId")Integer subjectId, @Param("pageStartId")int pageStartId, @Param("countPerPage")int countPerPage);
+
+    List<Course> selectBySubjectIdAndEndIdAndLimitAndDesc(@Param("subjectId")Integer subjectId, @Param("pageEndId")int pageEndId, @Param("countPerPage")int countPerPage);
 }

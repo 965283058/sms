@@ -69,6 +69,9 @@ public class CommandCodeDictionary
 
 		commandCodeMap.put(CommandCode.EMPTY_SUBJECT_NAME, "科目名称不能为空。");
 		commandCodeMap.put(CommandCode.SUBJECT_NOT_EXIST, "该科目不存在");
+
+		commandCodeMap.put(CommandCode.EMPTY_COURSE_NAME, "课程名称不能为空。");
+		commandCodeMap.put(CommandCode.COURSE_NOT_EXIST, "该课程不存在。");
 		commandCodeMap.put(CommandCode.EMPTY_UPLOAD_FILE, "上传文件为空。"); // "Upload file is empty."
 	}
 
