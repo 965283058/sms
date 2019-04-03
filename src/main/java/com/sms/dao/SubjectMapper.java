@@ -1,8 +1,12 @@
 package com.sms.dao;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.stereotype.Repository;
 
 import com.sms.model.Subject;
+
+import java.util.List;
 
 @Repository
 public interface SubjectMapper {
@@ -53,4 +57,10 @@ public interface SubjectMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Subject record);
+
+    int getCountBySchoolId(@Param("schoolId") Integer schoolId);
+
+    List<Subject> selectBySchoolIdAndStartIdAndLimitAndAsc(@Param("schoolId")Integer schoolId, @Param("pageStartId")int pageStartId, @Param("countPerPage")int countPerPage);
+
+    List<Subject> selectBySchoolIdAndEndIdAndLimitAndDesc(@Param("schoolId")Integer schoolId, @Param("pageEndId")int pageEndId, @Param("countPerPage")int countPerPage);
 }

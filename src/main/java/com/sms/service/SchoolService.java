@@ -80,8 +80,7 @@ public class SchoolService extends ServiceBase implements ISchoolService {
 
 	public synchronized CommandResult createSchool(SchoolVO schoolVO) {
 		if (StringUtils.isBlank(schoolVO.getName())) {
-			return new CommandResult(CommandCode.EMPTY_SCHOOL_NAME.getCode(),
-					CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_SCHOOL_NAME));
+			return new CommandResult(CommandCode.EMPTY_SCHOOL_NAME.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_SCHOOL_NAME));
 		}
 
 		// Check if school exists
