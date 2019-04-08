@@ -29,5 +29,6 @@
 		<mapper resource="com/sms/mapper/SubjectMapper.xml"/>
 		<mapper resource="com/sms/mapper/CourseMapper.xml"/>
 		<mapper resource="com/sms/mapper/CoursewareMapper.xml"/>
+		<mapper resource="com/sms/mapper/PaymentMapper.xml"/>
 	</mappers>
 </configuration>

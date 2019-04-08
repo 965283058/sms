@@ -1,13 +1,14 @@
 package com.sms.service;
 
 import com.sms.dao.*;
-import com.sms.model.InformationSubtypeDictionary;
-import com.sms.model.InformationTypeDictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sms.authentication.SessionManager;
 
 public abstract class ServiceBase {
+
+	@Autowired
+	protected PaymentMapper paymentMapper;
 
 	@Autowired
 	protected CoursewareMapper coursewareMapper;

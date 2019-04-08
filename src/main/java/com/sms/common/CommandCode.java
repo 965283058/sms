@@ -80,6 +80,7 @@ public enum CommandCode
 
     EMPTY_COURSEWARE_NAME(14000),
     COURSEWARE_NOT_EXIST(14002),
+    PAYMENT_NOT_EXIST(15002),
     EMPTY_UPLOAD_FILE(6000);
 
     private int value;
