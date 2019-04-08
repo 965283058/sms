@@ -1,8 +1,11 @@
 package com.sms.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sms.model.Courseware;
+
+import java.util.List;
 
 @Repository
 public interface CoursewareMapper {
@@ -53,4 +56,10 @@ public interface CoursewareMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Courseware record);
+
+    int getCountByCourseId(@Param("courseId") Integer courseId);
+
+    List<Courseware> selectByCourseIdAndStartIdAndLimitAndAsc(@Param("courseId")Integer courseId, @Param("pageStartId")int pageStartId, @Param("countPerPage")int countPerPage);
+
+    List<Courseware> selectByCourseIdAndEndIdAndLimitAndDesc(@Param("courseId")Integer courseId, @Param("pageEndId")int pageEndId, @Param("countPerPage")int countPerPage);
 }

@@ -77,6 +77,9 @@ public enum CommandCode
 
     EMPTY_COURSE_NAME(13000),
     COURSE_NOT_EXIST(13002),
+
+    EMPTY_COURSEWARE_NAME(14000),
+    COURSEWARE_NOT_EXIST(14002),
     EMPTY_UPLOAD_FILE(6000);
 
     private int value;

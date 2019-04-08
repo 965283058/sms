@@ -28,5 +28,6 @@
 		<mapper resource="com/sms/mapper/InformationSubtypeDictionaryMapper.xml"/>
 		<mapper resource="com/sms/mapper/SubjectMapper.xml"/>
 		<mapper resource="com/sms/mapper/CourseMapper.xml"/>
+		<mapper resource="com/sms/mapper/CoursewareMapper.xml"/>
 	</mappers>
 </configuration>

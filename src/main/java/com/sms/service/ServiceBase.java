@@ -10,6 +10,9 @@ import com.sms.authentication.SessionManager;
 public abstract class ServiceBase {
 
 	@Autowired
+	protected CoursewareMapper coursewareMapper;
+
+	@Autowired
 	protected CourseMapper courseMapper;
 
 	@Autowired
