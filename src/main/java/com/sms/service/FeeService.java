@@ -152,4 +152,10 @@ public class FeeService extends ServiceBase implements IFeeService {
         FeeVO feeVO = FeeDataHelper.convertFeeToFeeVO(fee);
         return new CommandResult(CommandCode.OK.getCode(),CommandCodeDictionary.getCodeMessage(CommandCode.OK),feeVO.serializeToJSONObject());
     }
+
+    @Override
+    public CommandResult deleteFee(Integer id) {
+        feeMapper.deleteByPrimaryKey(id);
+        return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
+    }
 }

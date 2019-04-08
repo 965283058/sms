@@ -93,4 +93,16 @@ public class FeeController extends ControllerBase {
             return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());
         }
     }
+
+    @ApiOperation(value = "Delete fee", notes = "Delete fee")
+    @RequestMapping(value = "/Fee/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public CommandResult deleteFee(@PathVariable Integer id){
+        try {
+            return iFeeService.deleteFee(id);
+        } catch (Exception ex) {
+            logger.error("Exception : " + ex.getMessage());
+            return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());
+        }
+    }
 }

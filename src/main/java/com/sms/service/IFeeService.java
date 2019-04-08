@@ -12,4 +12,5 @@ public interface IFeeService {
     CommandResult createFee(FeeVO fee);
     CommandResult updateFee(Integer id, FeeVO fee);
     CommandResult getFee(Integer id);
+    CommandResult deleteFee(Integer id);
 }
