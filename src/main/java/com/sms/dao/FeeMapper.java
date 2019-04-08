@@ -1,5 +1,6 @@
 package com.sms.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sms.model.Fee;
@@ -56,4 +57,10 @@ public interface FeeMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Fee record);
+
+    int getCountByFeeTypeId(@Param("feeTypeId") Integer feeTypeId);
+
+    List<Fee> selectByFeeTypeIdAndStartIdAndLimitAndAsc(@Param("feeTypeId")Integer feeTypeId, @Param("pageStartId")int pageStartId, @Param("countPerPage")int countPerPage);
+
+    List<Fee> selectByFeeTypeIdAndEndIdAndLimitAndDesc(@Param("feeTypeId")Integer feeTypeId, @Param("pageEndId")int pageEndId, @Param("countPerPage")int countPerPage);
 }

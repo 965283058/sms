@@ -1,12 +1,12 @@
 package com.sms.controller;
 
 
-import com.sms.common.CommandCode;
-import com.sms.common.CommandCodeDictionary;
-import com.sms.common.CommandResult;
-import com.sms.common.DataQueryResult;
+import com.sms.common.*;
+import com.sms.common.helper.FeeDataHelper;
+import com.sms.common.pagination.PaginationData;
 import com.sms.model.Fee;
 import com.sms.service.IFeeService;
+import com.sms.vo.FeeVO;
 import com.sms.vo.MemberVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Api
 @Controller
-public class FeeController {
+public class FeeController extends ControllerBase {
     private Logger logger;
 
     @Autowired
@@ -32,11 +32,16 @@ public class FeeController {
         logger = Logger.getLogger(FeeController.class);
     }
 
-    @RequestMapping(value = "/Fees", method = RequestMethod.GET)
+    @ApiOperation(value = "Get fees in page", notes = "Get fees in page")
+    @RequestMapping(value = "/Fees", params = {"limit", "offset", "paginationData", "_"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataQueryResult<Fee> getBranchSchoolsInPage(@RequestParam("feeTypeId") Integer feeTypeId) {
-        logger.debug(String.format("get fee list. fee type id = %s", feeTypeId));
-        return iFeeService.getFees(feeTypeId);
+    public DataQueryResult<JSONObject> getFeesInPage(HttpServletRequest request, @RequestParam Integer feeTypeId) {
+        fiGetItemsByPaginationData = (PaginationData paginationData) -> {
+            logger.debug(String.format("get fee list. fee type id = %s", feeTypeId));
+            return iFeeService.getFees(feeTypeId,paginationData);
+        };
+        DataQueryResult<JSONObject> jsonObjectDataQueryResult = GetPaginationData(request);
+        return jsonObjectDataQueryResult;
     }
 
     @ApiOperation(value = "Create Fee", notes = "Create Fee")
@@ -49,8 +54,8 @@ public class FeeController {
 
         try {
             JSONObject feeVoJsonObject = JSONObject.fromObject(feeJsonString);
-            Fee fee = (Fee) JSONObject.toBean(feeVoJsonObject, Fee.class);
-            return iFeeService.createFee(fee);
+            FeeVO feeVO = new FeeVO(feeVoJsonObject);
+            return iFeeService.createFee(feeVO);
         } catch (Exception ex) {
             logger.error("Exception : " + ex.getMessage());
             return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());
@@ -81,8 +86,8 @@ public class FeeController {
 
         try {
             JSONObject feeVoJsonObject = JSONObject.fromObject(feeJsonString);
-            Fee fee = (Fee) JSONObject.toBean(feeVoJsonObject, Fee.class);
-            return iFeeService.updateFee(id, fee);
+            FeeVO feeVO = new FeeVO(feeVoJsonObject);
+            return iFeeService.updateFee(id, feeVO);
         } catch (Exception ex) {
             logger.error("Exception : " + ex.getMessage());
             return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());

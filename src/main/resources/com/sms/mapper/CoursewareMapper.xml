@@ -216,7 +216,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getCountByCourseId" resultType="int">
-    select count(1) from course
+    select count(1) from courseware
     <where>
       <if test="courseId != null">course_id = #{courseId}</if>
     </where>
