@@ -2,6 +2,7 @@ package com.sms.controller;
 
 import com.sms.common.*;
 import com.sms.common.pagination.PaginationData;
+import com.sms.model.User;
 import com.sms.service.ICourseService;
 import com.sms.service.ISubjectService;
 import com.sms.vo.CourseVO;
@@ -64,7 +65,8 @@ public class CourseController extends ControllerBase {
             JSONObject courseVOJsonObject = JSONObject.fromObject(courseJsonString.trim());
             CourseVO courseVO = new CourseVO(courseVOJsonObject);
             logger.debug(String.format("Creating new course. name = %s", courseVO.getName()));
-            return courseService.createCourse(courseVO);
+            User loggedInUser = getLoggedInUser(request);
+            return courseService.createCourse(loggedInUser, courseVO);
         } catch (Exception ex) {
             logger.error("Exception : " + ex.getMessage());
             return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());
@@ -86,7 +88,7 @@ public class CourseController extends ControllerBase {
     @ApiOperation(value = "Edit Course", notes = "Edit Course")
     @RequestMapping(value = "/Course/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public CommandResult updateCourse(@PathVariable Integer id, @RequestBody String courseJsonString){
+    public CommandResult updateCourse(HttpServletRequest request, @PathVariable Integer id, @RequestBody String courseJsonString){
         try {
             logger.debug(String.format("Update course id = %s",id));
 
@@ -95,7 +97,8 @@ public class CourseController extends ControllerBase {
             }
             JSONObject courseJsonObject = JSONObject.fromObject(courseJsonString);
             CourseVO courseVO = new CourseVO(courseJsonObject);
-            return courseService.updateCourse(id, courseVO);
+            User loggedInUser = getLoggedInUser(request);
+            return courseService.updateCourse(id, loggedInUser, courseVO);
         } catch (Exception ex) {
             logger.error("Exception : " + ex.getMessage());
             return new CommandResult(CommandCode.INTERNAL_ERROR.getCode(), ex.getMessage());

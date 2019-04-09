@@ -85,7 +85,8 @@ public class FeeVO {
         jsonObject.put("school_name",schoolName);
         jsonObject.put("branch_school_id",branchSchoolId);
         jsonObject.put("branch_school_name",branchSchoolName);
-        jsonObject.put("group_id",groupName);
+        jsonObject.put("group_id",groupId);
+        jsonObject.put("group_name",groupName);
         jsonObject.put("member_id",memberId);
         jsonObject.put("member_name",memberName);
         jsonObject.put("price", price);

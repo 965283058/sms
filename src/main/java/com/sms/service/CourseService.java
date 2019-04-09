@@ -58,14 +58,16 @@ public class CourseService extends ServiceBase implements ICourseService {
     }
 
     @Override
-    public CommandResult createCourse(CourseVO courseVO) {
+    public CommandResult createCourse(User user, CourseVO courseVO) {
         if(null == courseVO || StringUtils.isBlank(courseVO.getName())){
             return new CommandResult(CommandCode.EMPTY_COURSE_NAME.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.EMPTY_COURSE_NAME));
         }
 
-        User user = userMapper.selectByPrimaryKey(courseVO.getUserId());
+//        User user = userMapper.selectByPrimaryKey(courseVO.getUserId());
         if(null == user){
-            return  new CommandResult(CommandCode.USER_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.USER_NOT_EXIST));
+            user = new User();
+            user.setId(1);
+//            return  new CommandResult(CommandCode.USER_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.USER_NOT_EXIST));
         }
 
         Subject subject = subjectMapper.selectByPrimaryKey(courseVO.getSubjectId());
@@ -74,6 +76,7 @@ public class CourseService extends ServiceBase implements ICourseService {
         }
 
         Course course = CourseDataHelper.convertCourseVOToCourse(courseVO);
+        course.setUserId(user.getId());
         courseMapper.insert(course);
         return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
     }
@@ -98,10 +101,12 @@ public class CourseService extends ServiceBase implements ICourseService {
     }
 
     @Override
-    public CommandResult updateCourse(Integer id, CourseVO courseVO) {
-        User user = userMapper.selectByPrimaryKey(courseVO.getUserId());
+    public CommandResult updateCourse(Integer id, User user, CourseVO courseVO) {
+//        User user = userMapper.selectByPrimaryKey(courseVO.getUserId());
         if(null == user){
-            return  new CommandResult(CommandCode.USER_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.USER_NOT_EXIST));
+            user = new User();
+            user.setId(1);
+//            return  new CommandResult(CommandCode.USER_NOT_EXIST.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.USER_NOT_EXIST));
         }
 
         Subject subject = subjectMapper.selectByPrimaryKey(courseVO.getSubjectId());
@@ -111,6 +116,7 @@ public class CourseService extends ServiceBase implements ICourseService {
 
         Course course = CourseDataHelper.convertCourseVOToCourse(courseVO);
         course.setId(id);
+        course.setUserId(user.getId());
         courseMapper.updateByPrimaryKey(course);
         return new CommandResult(CommandCode.OK.getCode(), CommandCodeDictionary.getCodeMessage(CommandCode.OK));
     }
